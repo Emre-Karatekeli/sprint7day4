@@ -1,7 +1,12 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Button, Card, CardBody, CardFooter, CardHeader, Form, FormFeedback, FormGroup, Input, Label } from "reactstrap"
-
+export const errorMessages = {
+    ad: 'Adınızı en az 3 karakter giriniz.',
+    soyad: 'Soyadınızı en az 3 karakter giriniz.',
+    email: 'Geçerli bir email adresi giriniz.',
+    password: 'En az 8 karakter, en az 1 büyük harf, en az 1küçük harf, en az 1sembol ve en az 1 rakam içermelidir.',
+} 
 const initialValues = {
     ad: '',
     soyad: '',
@@ -20,12 +25,12 @@ export default function Register() {
     const [id, setId] = useState('');
 
     const [isValid, setIsValid] = useState(false);
-    const errorMessages = {
+    /* export const errorMessages = {
         ad: 'Adınızı en az 3 karakter giriniz.',
         soyad: 'Soyadınızı en az 3 karakter giriniz.',
         email: 'Geçerli bir email adresi giriniz.',
         password: 'En az 8 karakter, en az 1 büyük harf, en az 1küçük harf, en az 1sembol ve en az 1 rakam içermelidir.',
-    }
+    } */
 
     const validateEmail = (email) => {
         return String(email)
@@ -105,8 +110,9 @@ export default function Register() {
                                 onChange={handleChange}
                                 value={formData.ad}
                                 invalid={errors.ad}
+                                data-cy="ad-input"
                             />
-                            {errors.ad && <FormFeedback>{errorMessages.ad}</FormFeedback>}
+                            {errors.ad && <FormFeedback data-cy="error-message">{errorMessages.ad}</FormFeedback>}
                         </FormGroup>
                         <FormGroup>
                             <Label for="soyad">
@@ -120,8 +126,9 @@ export default function Register() {
                                 onChange={handleChange}
                                 value={formData.soyad}
                                 invalid={errors.soyad}
+                                data-cy="soyad-input"
                             />
-                            {errors.soyad && <FormFeedback>{errorMessages.soyad}</FormFeedback>}
+                            {errors.soyad && <FormFeedback data-cy="error-message">{errorMessages.soyad}</FormFeedback>}
                         </FormGroup>
                         <FormGroup>
                             <Label for="email">
@@ -135,8 +142,9 @@ export default function Register() {
                                 onChange={handleChange}
                                 value={formData.email}
                                 invalid={errors.email}
+                                data-cy="email-input"
                             />
-                            {errors.email && <FormFeedback>{errorMessages.email}</FormFeedback>}
+                            {errors.email && <FormFeedback data-cy="error-message">{errorMessages.email}</FormFeedback>}
                         </FormGroup>
                         <FormGroup>
                             <Label for="password">
@@ -150,11 +158,12 @@ export default function Register() {
                                 onChange={handleChange}
                                 value={formData.password}
                                 invalid={errors.password}
+                                data-cy="password-input"
                             />
-                            {errors.password && <FormFeedback>{errorMessages.password}</FormFeedback>}
+                            {errors.password && <FormFeedback data-cy="error-message">{errorMessages.password}</FormFeedback>}
                         </FormGroup>
 
-                        <Button disabled={!isValid}>
+                        <Button disabled={!isValid} data-cy="submit-button">
                             Kayıt Ol
                         </Button>
                     </Form>
